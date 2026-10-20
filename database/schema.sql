@@ -1,0 +1,4 @@
+-- Finnish Genealogy Data
+-- Database schema
+--
+-- The relational data model will be designed here as the project develops.
