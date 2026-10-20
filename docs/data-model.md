@@ -34,16 +34,60 @@ The current data model consists of the following main tables:
 The current database structure can be represented with the following entity relationship diagram.
 ```mermaid
 erDiagram
-    HENKILOT ||--o{ HAVAINNOT : has
-    PAIKAT ||--o{ HAVAINNOT : contains
-    LAHTEET ||--o{ HAVAINNOT : provides
 
-    PAIKAT ||--o{ PAIKKAHAVAINNOT : has
-    LAHTEET ||--o{ PAIKKAHAVAINNOT : provides
+    HENKILOT {
+        string person_id PK
+    }
 
-    HAVAINNOT ||--o{ RIPPIKIRJAMERKINNAT : has
+    PAIKAT {
+        string place_id PK
+    }
 
-    HENKILOT ||--o{ SUHTEET : participates
-    SUHTEET ||--o{ SUHDELAHTEET : has
-    LAHTEET ||--o{ SUHDELAHTEET : provides
+    LAHTEET {
+        string lahde_id PK
+    }
+
+    HAVAINNOT {
+        string havainto_id PK
+        string person_id FK
+        string place_id FK
+        string lahde_id FK
+    }
+
+    PAIKKAHAVAINNOT {
+        string paikkahavainto_id PK
+        string place_id FK
+        string parent_place_id FK
+        string lahde_id FK
+    }
+
+    SUHTEET {
+        string suhde_id PK
+        string person_id_1 FK
+        string person_id_2 FK
+    }
+
+    SUHDELAHTEET {
+        string suhdelahde_id PK
+        string suhde_id FK
+        string lahde_id FK
+    }
+
+    RIPPIKIRJAMERKINNAT {
+        string merkinta_id PK
+        string havainto_id FK
+    }
+
+    HENKILOT ||--o{ HAVAINNOT : records
+    PAIKAT ||--o{ HAVAINNOT : location
+    LAHTEET ||--o{ HAVAINNOT : source
+
+    PAIKAT ||--o{ PAIKKAHAVAINNOT : observations
+    LAHTEET ||--o{ PAIKKAHAVAINNOT : source
+
+    HAVAINNOT ||--o{ RIPPIKIRJAMERKINNAT : entries
+
+    HENKILOT ||--o{ SUHTEET : person
+    SUHTEET ||--o{ SUHDELAHTEET : evidence
+    LAHTEET ||--o{ SUHDELAHTEET : source
 ```
