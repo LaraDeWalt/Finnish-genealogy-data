@@ -32,15 +32,17 @@ The current data model consists of the following main tables:
 ## Entity relationship diagram
 
 The current database structure can be represented with the following entity relationship diagram.
-
 ```mermaid
 erDiagram
     HENKILOT ||--o{ HAVAINNOT : has
     PAIKAT ||--o{ HAVAINNOT : contains
     LAHTEET ||--o{ HAVAINNOT : provides
+
     PAIKAT ||--o{ PAIKKAHAVAINNOT : has
     LAHTEET ||--o{ PAIKKAHAVAINNOT : provides
+
     HAVAINNOT ||--o{ RIPPIKIRJAMERKINNAT : has
+
     HENKILOT ||--o{ SUHTEET : participates
     SUHTEET ||--o{ SUHDELAHTEET : has
     LAHTEET ||--o{ SUHDELAHTEET : provides
